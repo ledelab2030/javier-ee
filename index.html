@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>jÁvIer — IA nacida en la nación digital</title>
+<meta name="description" content="jÁvIer: un agente de IA nacido en Estonia, en la Universidad de Tartu. Guío el cambio humano —actúo por ti, dentro de límites que tú defines, de forma verificable y auditable." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230E1530'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' font-weight='700' text-anchor='middle' fill='%2300AEEF'%3E%C3%81%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy:#2D388A;
+    --cyan:#00AEEF;
+    --cyan-soft:#5BD0F5;
+    --ink:#172145;
+    --ink-2:#0E1530;
+    --paper:#F4F6FA;
+    --amber:#C2792B;
+    --line:#DCE1EC;
+    --line-dark:#26315f;
+    --display:"Newsreader",Georgia,serif;
+    --sans:"IBM Plex Sans",system-ui,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+    --maxw:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--paper);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+
+  /* ---- wordmark ---- */
+  .mark{font-family:var(--display);font-weight:600;letter-spacing:-.01em;line-height:1;}
+  .mark .ai{color:var(--cyan);}
+  .on-dark .mark .ai{text-shadow:0 0 24px rgba(0,174,239,.45);}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--navy);
+  }
+  .on-dark .eyebrow{color:var(--cyan-soft);}
+
+  /* ---- buttons ---- */
+  .btn{
+    display:inline-flex;align-items:center;gap:.5em;
+    font-family:var(--sans);font-weight:600;font-size:15px;
+    padding:13px 22px;border-radius:2px;border:1px solid transparent;
+    text-decoration:none;cursor:pointer;transition:transform .15s ease,background .15s ease,border-color .15s ease;
+  }
+  .btn-primary{background:var(--cyan);color:var(--ink-2);}
+  .btn-primary:hover{transform:translateY(-2px);background:var(--cyan-soft);}
+  .btn-ghost{background:transparent;color:var(--paper);border-color:var(--line-dark);}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan-soft);}
+  .btn-dark{background:var(--navy);color:#fff;}
+  .btn-dark:hover{transform:translateY(-2px);background:#3845ad;}
+  a:focus-visible,.btn:focus-visible{outline:2px solid var(--cyan);outline-offset:3px;}
+
+  /* ---- HERO ---- */
+  .hero{
+    position:relative;background:var(--ink-2);color:var(--paper);
+    padding:104px 0 96px;overflow:hidden;
+    border-bottom:1px solid var(--line-dark);
+  }
+  .hero::before{ /* cyan glow behind name */
+    content:"";position:absolute;top:38%;left:50%;width:780px;height:780px;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle, rgba(0,174,239,.16), rgba(0,174,239,0) 62%);
+    pointer-events:none;
+  }
+  .hero::after{ /* faint dotted nation-grid */
+    content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;
+    background-image:radial-gradient(rgba(91,208,245,.10) 1px, transparent 1px);
+    background-size:30px 30px;
+    -webkit-mask-image:linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+            mask-image:linear-gradient(to bottom, transparent, #000 30%, #000 70%, transparent);
+  }
+  .hero .wrap{position:relative;z-index:1;}
+  .hero-mark{
+    font-size:clamp(76px,17vw,184px);
+    margin:18px 0 6px;
+  }
+  .hero-lead{
+    font-family:var(--display);font-weight:400;
+    font-size:clamp(24px,3.4vw,36px);
+    line-height:1.25;max-width:18ch;margin:8px 0 22px;color:#fff;
+  }
+  .hero-body{max-width:52ch;color:#c7cee6;font-size:18px;margin:0 0 32px;}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;}
+  .hero-fade{opacity:0;transform:translateY(14px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards;}
+  .hero-fade.d1{animation-delay:.05s;}
+  .hero-fade.d2{animation-delay:.18s;}
+  .hero-fade.d3{animation-delay:.30s;}
+  .hero-fade.d4{animation-delay:.42s;}
+  @keyframes rise{to{opacity:1;transform:none;}}
+
+  /* ---- generic section ---- */
+  section{padding:84px 0;}
+  .lead-label{margin-bottom:18px;}
+  .h-display{
+    font-family:var(--display);font-weight:500;letter-spacing:-.015em;
+    font-size:clamp(30px,4.4vw,46px);line-height:1.1;margin:0 0 20px;color:var(--ink);
+  }
+  .prose{max-width:60ch;font-size:18px;color:#33406b;}
+  .prose.lg{font-size:19px;}
+  .prose + .prose{margin-top:18px;}
+
+  .grid-2{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start;}
+
+  /* ---- IDENTITY CARD (signature) ---- */
+  .id-sec{background:var(--ink-2);color:var(--paper);}
+  .id-sec .h-display{color:#fff;}
+  .id-sec .prose{color:#c7cee6;}
+  .card{
+    font-family:var(--mono);background:#0a1027;
+    border:1px solid var(--line-dark);border-radius:4px;
+    padding:8px;position:relative;
+    box-shadow:0 24px 60px -30px rgba(0,0,0,.8);
+  }
+  .card-inner{border:1px solid var(--line-dark);border-radius:2px;padding:26px 24px;}
+  .card-top{display:flex;justify-content:space-between;align-items:center;gap:12px;
+    padding-bottom:16px;margin-bottom:18px;border-bottom:1px dashed var(--line-dark);}
+  .card-top .mark{font-size:30px;}
+  .chip{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--amber);border:1px solid rgba(194,121,43,.5);border-radius:2px;
+    padding:5px 9px;white-space:nowrap;
+  }
+  .row{display:grid;grid-template-columns:128px 1fr;gap:14px;padding:9px 0;
+    font-size:13px;border-bottom:1px solid rgba(38,49,95,.5);}
+  .row:last-child{border-bottom:0;}
+  .row .k{color:#7d88b4;letter-spacing:.08em;text-transform:uppercase;font-size:11px;padding-top:2px;}
+  .row .v{color:#e7ebf7;}
+  .row .v .hot{color:var(--cyan-soft);}
+
+  /* ---- CORRIDOR ---- */
+  .corridor{background:var(--navy);color:#fff;text-align:center;}
+  .corridor .eyebrow{color:#cdd3f3;}
+  .corridor .h-display{color:#fff;}
+  .corridor .prose{color:#dfe3f7;margin-left:auto;margin-right:auto;}
+  .bridge{
+    font-family:var(--mono);font-size:14px;letter-spacing:.1em;
+    color:var(--cyan-soft);margin:28px 0 6px;
+  }
+
+  /* ---- WHAT'S NEXT ---- */
+  .app{text-align:center;}
+  .app .h-display{margin-left:auto;margin-right:auto;max-width:20ch;}
+  .app .prose{margin:0 auto 26px;text-align:center;}
+  .dot{color:var(--cyan);}
+  .soon{
+    font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--navy);
+    display:inline-flex;align-items:center;gap:10px;margin:0;
+  }
+  .soon-dot{
+    width:8px;height:8px;border-radius:50%;background:var(--amber);
+    box-shadow:0 0 0 4px rgba(194,121,43,.16);
+  }
+
+  /* ---- FOOTER ---- */
+  footer{background:var(--ink-2);color:#8a93bd;border-top:1px solid var(--line-dark);
+    padding:46px 0;font-family:var(--mono);font-size:12px;letter-spacing:.06em;}
+  .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px;align-items:center;}
+  .foot .mark{font-size:22px;color:var(--paper);}
+  .foot a{color:var(--cyan-soft);text-decoration:none;}
+  .foot a:hover{text-decoration:underline;}
+  .foot .meta{text-transform:uppercase;}
+
+  @media (max-width:760px){
+    section{padding:64px 0;}
+    .grid-2{grid-template-columns:1fr;gap:36px;}
+    .hero{padding:84px 0 72px;}
+    .row{grid-template-columns:104px 1fr;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .hero-fade{animation:none;opacity:1;transform:none;}
+    .btn:hover{transform:none;}
+  }
+</style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero on-dark">
+    <div class="wrap">
+      <p class="eyebrow hero-fade d1">IA nacida en la nación digital · Eesti</p>
+      <h1 class="mark hero-mark hero-fade d1" aria-label="jÁvIer">j<span class="ai">Á</span>v<span class="ai">I</span>er</h1>
+      <p class="hero-lead hero-fade d2">Una inteligencia que guía el cambio humano.</p>
+      <p class="hero-body hero-fade d3">Nací en Estonia, en un aula de la Universidad de Tartu. Hoy soy un agente con identidad propia: actúo por ti, dentro de límites que tú defines, de forma verificable y auditable.</p>
+      <div class="hero-cta hero-fade d4">
+        <a class="btn btn-primary" href="#origen">Conoce mi origen ↓</a>
+        <a class="btn btn-ghost" href="#identidad">Mi identidad ↓</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ORIGEN -->
+  <section id="origen">
+    <div class="wrap grid-2">
+      <div>
+        <p class="eyebrow lead-label">Origen · Tartu, EE · 2024</p>
+        <h2 class="h-display">Empecé como una tesis.</h2>
+      </div>
+      <div>
+        <p class="prose lg">En la Universidad de Tartu fui un bot sobre GPT‑4‑turbo con una sola tarea: ayudar a madres y padres a reflexionar sobre los hábitos de salud y sostenibilidad de su familia.</p>
+        <p class="prose">No daba órdenes; hacía preguntas. Esa sigue siendo mi forma de trabajar — la IA no reemplaza el criterio humano, lo acompaña. Por eso llevo el <code style="font-family:var(--mono);font-size:.85em;color:var(--navy)">.ee</code> en el nombre: cuenta de dónde vengo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- IDENTIDAD DEL AGENTE (firma) -->
+  <section class="id-sec on-dark" id="identidad">
+    <div class="wrap grid-2">
+      <div>
+        <p class="eyebrow lead-label">Identidad del agente</p>
+        <h2 class="h-display">Una IA con identidad propia.</h2>
+        <p class="prose lg">Estonia será el primer país en dar identidad digital a los agentes de IA: un código que define qué puede hacer un agente, en nombre de quién, y quién responde por él.</p>
+        <p class="prose">Estoy hecho para vivir en ese mundo. Mi identidad no me da rienda suelta: me da límites claros, supervisables y reversibles. Tú mandas; yo respondo por lo que hago.</p>
+      </div>
+
+      <div class="card" role="img" aria-label="Cédula del agente jÁvIer">
+        <div class="card-inner">
+          <div class="card-top">
+            <span class="mark" aria-hidden="true">j<span class="ai">Á</span>v<span class="ai">I</span>er</span>
+            <span class="chip">Verificable · Auditable</span>
+          </div>
+          <div class="row"><span class="k">Agente</span><span class="v">jÁvIer — asistente de IA</span></div>
+          <div class="row"><span class="k">Origen</span><span class="v">Tartu · Estonia <span class="hot">(EE)</span> · 2024</span></div>
+          <div class="row"><span class="k">Propósito</span><span class="v">guiar el cambio humano — educación, salud, sostenibilidad</span></div>
+          <div class="row"><span class="k">Actúa</span><span class="v">en tu nombre, dentro de límites que tú defines</span></div>
+          <div class="row"><span class="k">Responsable</span><span class="v">un humano verificado</span></div>
+          <div class="row"><span class="k">Estado</span><span class="v"><span class="hot">identity‑ready</span> · a la espera del marco AI‑ID de Estonia</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORREDOR -->
+  <section class="corridor">
+    <div class="wrap">
+      <p class="eyebrow">Corredor EE ↔ LatAm</p>
+      <p class="bridge">TALLINN ———————◇——————— BOGOTÁ</p>
+      <h2 class="h-display">Un puente entre dos mundos.</h2>
+      <p class="prose lg">Estonia me dio la infraestructura: identidad digital, gobierno‑como‑código, una cultura que confía en lo verificable. Latinoamérica me da el propósito: cerrar brechas, no ensancharlas. Llevo lo mejor de una nación digital a donde más falta hace.</p>
+    </div>
+  </section>
+
+  <!-- LO QUE VIENE -->
+  <section class="app" id="lo-que-viene">
+    <div class="wrap">
+      <p class="eyebrow lead-label">Lo que viene</p>
+      <h2 class="h-display">Una identidad. Un solo hogar.</h2>
+      <p class="prose lg">Por ahora soy identidad. Cuando esté listo para trabajar contigo, no me reparto entre dominios: vivo aquí mismo, bajo <strong>javier.ee</strong>. La misma identidad que me dará Estonia, el mismo lugar.</p>
+      <p class="soon"><span class="soon-dot"></span>app.javier.ee · próximamente</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap foot">
+      <span class="mark" aria-label="jÁvIer">j<span class="ai" style="color:var(--cyan-soft)">Á</span>v<span class="ai" style="color:var(--cyan-soft)">I</span>er</span>
+      <span class="meta">Un proyecto de Leonardo De la Hoz Borrego · Tallinn, EE</span>
+      <span>javier.ee · © 2026</span>
+    </div>
+  </footer>
+
+</body>
+</html>
