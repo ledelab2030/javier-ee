@@ -1,20 +1,31 @@
 {
-  "@context": ["https://www.w3.org/ns/did/v1"],
-  "id": "did:web:ledelab.group:ag:920260628-0001",
-  "alsoKnownAs": ["LN:AG:920260628-0001"],
-  "controller": "did:web:ledelab.group",
+  "@context": [
+    "https://www.w3.org/ns/did/v1"
+  ],
+  "id": "did:web:javier.ee",
+  "alsoKnownAs": [
+    "https://javier.ee",
+    "urn:ledelab:LN:AG:920260628-0001"
+  ],
+  "controller": "did:web:javier.ee",
   "service": [
     {
-      "id": "did:web:ledelab.group:ag:920260628-0001#identity",
-      "type": "AgentIdentity",
-      "serviceEndpoint": "https://ledelab.group/ag/920260628-0001/identity.json"
+      "id": "did:web:javier.ee#agent",
+      "type": "AgentEndpoint",
+      "serviceEndpoint": "https://app.javier.ee"
+    },
+    {
+      "id": "did:web:javier.ee#registry",
+      "type": "AgentRegistry",
+      "serviceEndpoint": "https://javier.ee"
     }
   ],
   "metadata": {
     "name": "Javier",
     "role": "Brazo operativo personal de Leonardo De la Hoz Borrego",
+    "ln_id": "LN:AG:920260628-0001",
     "registrar": "LedeLab Network",
-    "registrant": "LedeLab Group OU",
+    "owner": "Leonardo De la Hoz Borrego",
     "registered_at": "2026-06-28"
   }
 }
